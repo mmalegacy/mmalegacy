@@ -2716,7 +2716,7 @@ function drawF(){var f=FT,op=f.op,e=f.end,V=[0,1,2,3,4,5,6,7].map(function(i){va
  var bbh=null;try{bbh=e&&window.bbInfo&&window.bbInfo()}catch(x){}
  var tx=e?(bbh?'Fim da luta. A decisão vem a seguir.':f.street?'Meteu o cacete no corno':e.fin?(e.w==='m'?'Vitória':'Derrota')+' por '+(e.ko?'nocaute':'finalização')+' no round '+f.r:(e.w==='d'?'Empate':e.w==='m'?'Vitória':'Derrota')+' por '+e.dec):'',
  ui=e?'<div style="text-align:center;margin:10px 0"><div style="font:700 22px Georgia,serif">'+tx+'</div><button class="go" data-f="1">Continuar</button></div>':'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">'+(f.mn||MN)[f.P].map(function(k){return '<button class="go" data-k="'+k+'" style="margin:0;padding:13px 6px;background:#0022dd">'+((f.lbl&&f.lbl[k])||AC[k][0])+'</button>'}).join('')+'</div>';
- $('fgi').innerHTML='<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:14px;color:var(--mute);min-height:20px"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc((op.kind==='gp'&&op.t?op.t+' · ':'')+evN(op,S.day,'Evento'))+'</span><span style="flex:none;white-space:nowrap">Round <b style="color:var(--ink)">'+f.r+'</b> de '+f.rd+', troca '+Math.min(f.nx||4,f.t+1)+'/'+(f.nx||4)+'</span></div><div style="display:flex;gap:10px;margin:8px 0">'+hb(esc(nmFull()),f.m.h,f.m.h0,f.m.e,'#0a5cff')+hb(esc(op.n)+(f.mo!=null&&op.o!=null?' <span style="color:var(--mute);font-weight:400;font-size:12px">OVR '+op.o+'</span>':'')+(f.sty?' <span style="color:var(--mute);font-weight:400;font-size:12px">'+STY[f.sty].n+'</span>':''),f.o.h,100,f.o.e,'#e60000')+'</div>'+svg+'<div style="text-align:center;color:var(--mute);font-size:13px">'+{s:'Em pé',t:'Você por cima, no chão',b:'Você por baixo, no chão'}[f.P]+'</div><div style="min-height:65px;line-height:1.25;margin:6px 0;font-size:15px">'+f.msg.slice(-3).map(function(m,i,a){return '<div'+(i<a.length-1?' style="color:var(--mute)"':'')+'>'+esc(m)+'</div>'}).join('')+'</div>'+ui+(f.bjj?'<div style="margin-top:12px;font-size:15px">Pontos: você <b>'+Math.round(f.m.p)+'</b> x <b>'+Math.round(f.o.p)+'</b> '+esc(op.n)+'<div style="color:var(--mute);font-size:13px;margin-top:2px">Vantagens: você <b>'+(f.m.v||0)+'</b> x <b>'+(f.o.v||0)+'</b></div></div><div style="color:var(--mute);font-size:12px;margin-top:4px">Vence por finalização ou por pontos. Em empate de pontos, decidem as vantagens (tentativas que quase deram certo). Barra amarela: fôlego.</div>':'<table style="width:100%;border-collapse:collapse;font-size:12px;text-align:center;margin-top:12px"><tr style="color:var(--mute)">'+hd.join('')+'</tr>'+tb+'</table><div style="color:var(--mute);font-size:12px;margin-top:4px">Placar dos juízes, sistema de 10 pontos. Barra amarela: fôlego.</div>');if((bbh||(window.bbBelt&&window.bbBelt()))&&!f.street){var tb0=$('fgi').querySelector('table');if(tb0){if(tb0.nextElementSibling)tb0.nextElementSibling.remove();tb0.remove()}}if(f.street){var tbl=$('fgi').querySelector('table');if(tbl){if(tbl.nextElementSibling)tbl.nextElementSibling.remove();tbl.remove()}var tp=$('fgi').firstElementChild;if(tp&&tp.lastElementChild)tp.lastElementChild.textContent=''}fanim(f,ps)}
+ $('fgi').innerHTML='<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:14px;color:var(--mute);min-height:20px"><span style="min-width:0;overflow-wrap:anywhere">'+esc((op.kind==='gp'&&op.t?op.t+' · ':'')+evN(op,S.day,'Evento'))+'</span><span style="flex:none;white-space:nowrap">Round <b style="color:var(--ink)">'+f.r+'</b> de '+f.rd+', troca '+Math.min(f.nx||4,f.t+1)+'/'+(f.nx||4)+'</span></div><div style="display:flex;gap:10px;margin:8px 0">'+hb(esc(nmFull()),f.m.h,f.m.h0,f.m.e,'#0a5cff')+hb(esc(op.n)+(f.mo!=null&&op.o!=null?' <span style="color:var(--mute);font-weight:400;font-size:12px">OVR '+op.o+'</span>':'')+(f.sty?' <span style="color:var(--mute);font-weight:400;font-size:12px">'+STY[f.sty].n+'</span>':''),f.o.h,100,f.o.e,'#e60000')+'</div>'+svg+'<div style="text-align:center;color:var(--mute);font-size:13px">'+{s:'Em pé',t:'Você por cima, no chão',b:'Você por baixo, no chão'}[f.P]+'</div><div style="min-height:65px;line-height:1.25;margin:6px 0;font-size:15px">'+f.msg.slice(-3).map(function(m,i,a){return '<div'+(i<a.length-1?' style="color:var(--mute)"':'')+'>'+esc(m)+'</div>'}).join('')+'</div>'+ui+(f.bjj?'<div style="margin-top:12px;font-size:15px">Pontos: você <b>'+Math.round(f.m.p)+'</b> x <b>'+Math.round(f.o.p)+'</b> '+esc(op.n)+'<div style="color:var(--mute);font-size:13px;margin-top:2px">Vantagens: você <b>'+(f.m.v||0)+'</b> x <b>'+(f.o.v||0)+'</b></div></div><div style="color:var(--mute);font-size:12px;margin-top:4px">Vence por finalização ou por pontos. Em empate de pontos, decidem as vantagens (tentativas que quase deram certo). Barra amarela: fôlego.</div>':'<table style="width:100%;border-collapse:collapse;font-size:12px;text-align:center;margin-top:12px"><tr style="color:var(--mute)">'+hd.join('')+'</tr>'+tb+'</table><div style="color:var(--mute);font-size:12px;margin-top:4px">Placar dos juízes, sistema de 10 pontos. Barra amarela: fôlego.</div>');if((bbh||(window.bbBelt&&window.bbBelt()))&&!f.street){var tb0=$('fgi').querySelector('table');if(tb0){if(tb0.nextElementSibling)tb0.nextElementSibling.remove();tb0.remove()}}if(f.street){var tbl=$('fgi').querySelector('table');if(tbl){if(tbl.nextElementSibling)tbl.nextElementSibling.remove();tbl.remove()}var tp=$('fgi').firstElementChild;if(tp&&tp.lastElementChild)tp.lastElementChild.textContent=''}fanim(f,ps)}
 function mvd(){return{a:Math.PI,r:58,x:150,y:150}}
 function mvStep(f,k){var m=f.mv||(f.mv=mvd()),c=function(v,a,b){return Math.max(a,Math.min(b,v))},st=k==='jab'||k==='kick'||k==='gnp';
  m.a+=(Math.random()-.5)*1.8;var sm=f.street;m.x=c(m.x+(Math.random()-.5)*(sm?14:50),sm?138:105,sm?162:195);m.y=c(m.y+(Math.random()-.5)*(sm?14:50),sm?138:105,sm?162:195);
@@ -4005,6 +4005,43 @@ body,#v-inicio,#log{overflow-anchor:none}
  try{new ResizeObserver(function(){if(top.clientWidth!==lastW)fit()}).observe(top)}catch(e){window.addEventListener('resize',fit)}
  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
  setTimeout(fit,0);
+})();
+</script>
+<style id="fit-more-css">
+/* Cartel/Categoria/Idade: texto longo desce para a 2ª linha, sem mudar a altura da área */
+#pcard .pst.two b{height:24px;font-size:12px;line-height:12px;white-space:normal;overflow-wrap:anywhere;text-overflow:clip;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* Botões Próxima semana / Passar 30 dias: texto longo desce para a 2ª linha */
+#rest.two,#month.two{white-space:normal;text-overflow:clip;padding-top:4px;padding-bottom:4px;font-size:13px;line-height:15px;display:flex;align-items:center;justify-content:center;text-align:center}
+</style>
+<script id="fit-more">
+(function(){
+ function watch(el,fn){
+  if(!el)return;var lw=-1;
+  try{new MutationObserver(fn).observe(el,{childList:true,subtree:true,characterData:true})}catch(e){}
+  try{new ResizeObserver(function(){var w=el.clientWidth;if(w!==lw){lw=w;fn()}}).observe(el)}catch(e){window.addEventListener('resize',fn)}
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fn);
+  setTimeout(fn,0);
+ }
+ var pst=document.querySelector('#pcard .pst');
+ watch(pst,function(){
+  pst.classList.remove('two');var o=false;
+  pst.querySelectorAll('b').forEach(function(b){if(b.clientWidth>0&&b.scrollWidth>b.clientWidth+1)o=true});
+  if(o)pst.classList.add('two');
+ });
+ var phoje=document.querySelector('#pcard .phoje');
+ watch(phoje,function(){
+  phoje.querySelectorAll(':scope>div').forEach(function(d){
+   d.style.fontSize='';var s=13;
+   while(d.clientWidth>0&&d.scrollWidth>d.clientWidth+1&&s>9){s-=.5;d.style.fontSize=s+'px'}
+  });
+ });
+ ['rest','month'].forEach(function(id){
+  var b=document.getElementById(id);
+  watch(b,function(){
+   b.classList.remove('two');
+   if(b.clientWidth>0&&b.scrollWidth>b.clientWidth+1)b.classList.add('two');
+  });
+ });
 })();
 </script>
 </body></html>
