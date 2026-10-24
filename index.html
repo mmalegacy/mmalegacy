@@ -586,7 +586,7 @@ body{background:transparent!important;transition:none!important}
 #pcard .row .l{width:64px}
 #pcard .bar{height:7px}
 #pcard .row .v{width:30px;color:var(--ink)}
-#pcard .phoje{margin-top:7px;padding-top:6px;border-top:1px solid var(--line);font-size:13px}
+#pcard .phoje{margin-top:2px;padding-top:6px;border-top:1px solid var(--line);font-size:13px}
 :root[data-th="mmr"] #pcard{background:radial-gradient(circle at 100% 100%,rgba(255,212,0,.4) 0,rgba(255,212,0,0) 38%),linear-gradient(170deg,#3b1a66 0%,#2b0f4d 100%);border-color:#58327f;box-shadow:0 3px 12px rgba(20,6,40,.5)}
 :root[data-th="mmr"] #pcard::before{background:linear-gradient(90deg,#f5c800,#8b5cf6)}
 :root[data-th="mmr"] #pcard .pfr{background:linear-gradient(135deg,#f5c800,#8b5cf6)}
@@ -4009,7 +4009,7 @@ body,#v-inicio,#log{overflow-anchor:none}
 </script>
 <style id="fit-more-css">
 /* Cartel/Categoria/Idade: texto longo desce para a 2ª linha, sem mudar a altura da área */
-#pcard .pst.two b{height:24px;font-size:12px;line-height:12px;white-space:normal;overflow-wrap:anywhere;text-overflow:clip;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#pcard #hwc.two{height:24px;line-height:12px;white-space:normal;overflow-wrap:anywhere;text-overflow:clip;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 /* Botões Próxima semana / Passar 30 dias: texto longo desce para a 2ª linha */
 #rest.two,#month.two{white-space:normal;text-overflow:clip;padding-top:4px;padding-bottom:4px;font-size:13px;line-height:15px;display:flex;align-items:center;justify-content:center;text-align:center}
 </style>
@@ -4022,11 +4022,11 @@ body,#v-inicio,#log{overflow-anchor:none}
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fn);
   setTimeout(fn,0);
  }
- var pst=document.querySelector('#pcard .pst');
- watch(pst,function(){
-  pst.classList.remove('two');var o=false;
-  pst.querySelectorAll('b').forEach(function(b){if(b.clientWidth>0&&b.scrollWidth>b.clientWidth+1)o=true});
-  if(o)pst.classList.add('two');
+ var hwc=document.getElementById('hwc');
+ watch(hwc,function(){
+  hwc.classList.remove('two');hwc.style.fontSize='';var s=16;
+  while(hwc.clientWidth>0&&hwc.scrollWidth>hwc.clientWidth+1&&s>11){s-=.5;hwc.style.fontSize=s+'px'}
+  if(hwc.clientWidth>0&&hwc.scrollWidth>hwc.clientWidth+1){hwc.style.fontSize='11px';hwc.classList.add('two')}
  });
  var phoje=document.querySelector('#pcard .phoje');
  watch(phoje,function(){
