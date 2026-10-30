@@ -2327,9 +2327,9 @@ $('spons').onclick=function(e){var b=e.target.closest('button');if(!b)return;var
  else if(b.dataset.sd!=null){i=+b.dataset.sd;var y=(S.spf||[])[i];if(!y)return;S.spf.splice(i,1);S.log.unshift([S.day,'Você recusou a oferta de patrocínio da '+y.n+'.']);toast('Oferta recusada')}
  else return;save();renderSpons()};
 
-function renderCar(){renderSpons();renderCartel();ensureOffers();pend=-1;pw=-1;renderOffers();renderWC();$('carinfo').innerHTML=[['Organização',orgName()],['Categoria',DV[S.wc][0]],['Academia',GYMS[S.gym||0].n],['Mestre',GYMS[S.gym||0].m]].concat(S.st!=='am'?[['Empresário','Renato Moicano']]:[]).concat([['Base',BASES[S.base||0].n],['Idade',age(S.day)+' anos'],(S.st==='am'?['Cartel Amador',(S.recA||S.rec).join('-')]:['Cartel',(S.recP||[0,0,0]).join('-')]),['Vitórias por via rápida',(S.hist||[]).filter(function(f){return f.r==='w'&&/por (nocaute|finalização)/.test(f.h)}).length]]).concat(S.lc?[['Cinturão LFA','Campeão']]:[]).concat(S.ch.length?[['Cinturões UFC',S.ch.length]]:[]).map(function(r){return '<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0"><span style="color:var(--mute)">'+r[0]+'</span><b style="text-align:right">'+r[1]+'</b></div>'}).join('')}
+function renderCar(){renderSpons();renderCartel();ensureOffers();pend=-1;pw=-1;renderOffers();renderWC();$('carinfo').innerHTML=[['Organização',orgName()],['Categoria',DV[S.wc][0]],['Academia',GYMS[S.gym||0].n],['Mestre',GYMS[S.gym||0].m]].concat(S.st!=='am'?[['Empresário','Renato Moicano']]:[]).concat([['Base',BASES[S.base||0].n],['Idade',age(S.day)+' anos'],(S.st==='am'?['Cartel Amador',(S.recA||S.rec).join('-')]:['Cartel',(S.recP||[0,0,0]).join('-')]),['Vitórias por via rápida',(S.hist||[]).filter(function(f){return f.r==='w'&&!f.nc&&/por (nocaute|finalização)/.test(f.h)}).length]]).concat(S.lc?[['Cinturão LFA','Campeão']]:[]).concat(S.ch.length?[['Cinturões UFC',S.ch.length]]:[]).map(function(r){return '<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0"><span style="color:var(--mute)">'+r[0]+'</span><b style="text-align:right">'+r[1]+'</b></div>'}).join('')}
 function retCq(){if(!S||S.retCq)return;S.retCq=1;window.__retCq=1;try{save()}catch(e){}try{window.renderConq()}catch(e){}$('ret').hidden=true;$('cqs').style.animation='none';$('cqs').hidden=false;$('cqs').scrollTop=0;try{applyTheme()}catch(e){}}
-function showRet(){var h=S.hist||[],ufc=h.filter(function(f){return /^UFC/.test(f.ev||'')}).length,vr=h.filter(function(f){return f.r==='w'&&/por (nocaute|finalização)/.test(f.h)}).length,rows=[['Lutador',nmFull()],['Idade',age(S.ret)+' anos'],['Organização',orgName()],['Categoria',DV[S.wc][0]],['Cartel total',(S.rec||[0,0,0]).join('-')]];if(S.st!=='am')rows.push(['Cartel profissional',(S.recP||[0,0,0]).join('-')]);rows.push(['Vitórias por via rápida',vr]);if(ufc)rows.push(['Lutas no UFC',ufc]);rows.push(['Cinturões UFC',(S.ch&&S.ch.length)||0]);$('rets').innerHTML='<div style="margin-bottom:10px">Você se aposentou em <b>'+dt(S.ret,1)+'</b>, aos '+age(S.ret)+' anos, com cartel de '+S.rec.join('-')+' no '+DV[S.wc][0]+'.</div><div style="border-top:1px solid var(--line);padding-top:8px">'+rows.map(function(r){return '<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0"><span style="color:var(--mute)">'+r[0]+'</span><b style="text-align:right">'+esc(String(r[1]))+'</b></div>'}).join('')+'</div>';$('ret').hidden=false;try{retCq()}catch(e9){}}
+function showRet(){var h=S.hist||[],ufc=h.filter(function(f){return /^UFC/.test(f.ev||'')}).length,vr=h.filter(function(f){return f.r==='w'&&!f.nc&&/por (nocaute|finalização)/.test(f.h)}).length,rows=[['Lutador',nmFull()],['Idade',age(S.ret)+' anos'],['Organização',orgName()],['Categoria',DV[S.wc][0]],['Cartel total',(S.rec||[0,0,0]).join('-')]];if(S.st!=='am')rows.push(['Cartel profissional',(S.recP||[0,0,0]).join('-')]);rows.push(['Vitórias por via rápida',vr]);if(ufc)rows.push(['Lutas no UFC',ufc]);rows.push(['Cinturões UFC',(S.ch&&S.ch.length)||0]);$('rets').innerHTML='<div style="margin-bottom:10px">Você se aposentou em <b>'+dt(S.ret,1)+'</b>, aos '+age(S.ret)+' anos, com cartel de '+S.rec.join('-')+' no '+DV[S.wc][0]+'.</div><div style="border-top:1px solid var(--line);padding-top:8px">'+rows.map(function(r){return '<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0"><span style="color:var(--mute)">'+r[0]+'</span><b style="text-align:right">'+esc(String(r[1]))+'</b></div>'}).join('')+'</div>';$('ret').hidden=false;try{retCq()}catch(e9){}}
 var _showRet0=showRet;
 showRet=function(){_showRet0();try{buildRCard()}catch(e){}};
 function buildRCard(){
@@ -2368,12 +2368,12 @@ function buildRCard(){
 @media(prefers-reduced-motion:reduce){#rcard.lend::after{animation:none}}`;document.head.appendChild(st)}
  var h=S.hist||[],tot=S.rec||[0,0,0],pr=S.recP||[0,0,0],
  ufc=h.filter(function(f){return /^UFC/.test(f.ev||'')}).length,
- vr=h.filter(function(f){return f.r==='w'&&/por (nocaute|finaliza\u00e7\u00e3o)/.test(f.h)}).length,
+ vr=h.filter(function(f){return f.r==='w'&&!f.nc&&/por (nocaute|finaliza\u00e7\u00e3o)/.test(f.h)}).length,
  nch=(S.ch||[]).length,
  AB={Socos:'SOC',Chutes:'CHU',Defesa:'DEF',Wrestling:'WRE','Jiu-jitsu':'JJ',Cardio:'CAR'},
  ks=S.bx?Object.keys(S.bx):Object.keys(S.a||{}),
  fol=S.fol?(S.fol>=1e8?Math.floor(S.fol/1e6)+' mi':S.fol>=1e6?(Math.floor(S.fol/1e5)/10).toFixed(1).replace('.',',')+' mi':S.fol>=1e3?Math.round(S.fol/1e3)+' mil':String(S.fol)):'',
- cells=[['Cartel',tot.join('-')],['Via r\u00e1pida',vr],['Cintur\u00f5es',nch],['Lutas',h.length]];
+ cells=[['Cartel',tot.join('-')],['Via r\u00e1pida',vr],['Cintur\u00f5es',nch],['Lutas',h.filter(function(f){return !f.nc}).length]];
  if(ufc)cells.push(['Lutas UFC',ufc]);else if(S.st!=='am')cells.push(['Cartel pro',pr.join('-')]);
  var fr=S.floydRes||((h.filter(function(f){return /Floyd/i.test(f.n||'')})[0]||{}).r);if(fr)cells.push(['Floyd Mayweather',fr==='w'?'GANHOU':fr==='l'?'PERDEU':'EMPATE',fr==='w'?col(99):'#fff']);
  var nch2=(S.ch||[]).length,uf=ufc>0||S.ufc||S.exUfc||S.sxu,
@@ -2382,7 +2382,7 @@ function buildRCard(){
  sps='',cellsX=(function(){var G=function(k){var r=[0,0,0];h.forEach(function(f){if(f.ev&&f.ev.indexOf(k)>=0)r[f.r==='w'?0:f.r==='l'?1:2]++});return r.join('-')},A=(S.recA||tot).join('-'),P=pr.join('-'),fm=function(n){return n>=1e9?(Math.floor(n/1e8)/10).toFixed(1).replace('.',',').replace(/,0$/,'')+' bi':n>=1e8?Math.floor(n/1e6)+' mi':n>=1e6?(Math.floor(n/1e5)/10).toFixed(1).replace('.',',').replace(/,0$/,'')+' mi':n>=1e3?Math.round(n/1e3)+' mil':String(n)},dfc=h.filter(function(f){return f.df}).length,fc=fr?['Floyd Mayweather',fr==='w'?'GANHOU':fr==='l'?'PERDEU':'EMPATE',fr==='w'?col(99):'#fff']:['Floyd Mayweather','\u2014'],gb=G('Open GP de BJJ'),gx=G('Open GP de Boxe');
  if(ri===0)return [['Cartel',S.st==='am'?A:P],['Cartel amador BJJ',gb],['Cartel amador Boxe',gx]];
  if(ri===1)return [['Cartel',P],['Lutas UFC',ufc],['Via r\u00e1pida',vr],['MMA amador',A],['Boxe amador',gx],['BJJ amador',gb]];
- if(ri<4)return [['Cartel',tot.join('-')],['Lutas UFC',ufc],['Via r\u00e1pida',vr],['Cintur\u00f5es',nch],['Lutas totais',h.length],['Seguidores',fm((S.fol||0)+(S.tfol||0))]];
+ if(ri<4)return [['Cartel',tot.join('-')],['Lutas UFC',ufc],['Via r\u00e1pida',vr],['Cintur\u00f5es',nch],['Lutas totais',h.filter(function(f){return !f.nc}).length],['Seguidores',fm((S.fol||0)+(S.tfol||0))]];
  return [['Cartel',tot.join('-')],['Lutas UFC',ufc],['Cintur\u00f5es',nch],['Via r\u00e1pida',vr],['Defesas de cintur\u00e3o',dfc],fc]})(),
  nm=((S.fn||'Lutador')+(S.ln?' '+S.ln:'')).trim(),ov=ovr();
  $('rets').className='rcw';
@@ -3302,7 +3302,7 @@ function upd(){
 }
 function fill(){
  try{
-  var h=S.hist||[],ufc=h.filter(function(f){return /^UFC/.test(f.ev||'')}).length,vr=h.filter(function(f){return f.r==='w'&&/por (nocaute|finalização)/.test(f.h)}).length;
+  var h=S.hist||[],ufc=h.filter(function(f){return /^UFC/.test(f.ev||'')}).length,vr=h.filter(function(f){return f.r==='w'&&!f.nc&&/por (nocaute|finalização)/.test(f.h)}).length;
   var rows=[['Lutador',nmFull()],['Idade',age(S.day)+' anos'],['Organização',orgName()],['Categoria',DV[S.wc][0]],['Cartel total',(S.rec||[0,0,0]).join('-')]];
   if(S.st!=='am')rows.push(['Cartel profissional',(S.recP||[0,0,0]).join('-')]);
   rows.push(['Vitórias por via rápida',vr]);
